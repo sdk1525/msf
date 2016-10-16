@@ -1,30 +1,35 @@
 package com.mfs.client;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
-public class MsgRestTemplate {
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+public class MsgRestTemplate{
 
 	
 	private static HttpStatus statusCode;
+	
+	
+	 
 
 	public static void main (String a[]){
-		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://localhost:8080/mfs/message/redirect";
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_XML);
-		Map<String,String> param = new HashMap<>();
-		param.put("test","data");
-		HttpEntity<String> request = new HttpEntity<String>(headers);
-		ResponseEntity<String> exchange = restTemplate.exchange(url, HttpMethod.POST, request, String.class);
+		Jaxb2RootElementHttpMessageConverter messageConverters = new Jaxb2RootElementHttpMessageConverter();
+		RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
+		List list = new ArrayList<>();
+		list.add(messageConverters);
+		adapter.setMessageConverters(list);
+		String xml = "<?xml version=\"1.0\"?><customer><age>1</age><name>Gambardella, Matthew</name><id>12</id></customer>";
+		ResponseEntity<String> exchange = HttpHeadersV1.postData("test",xml,"http://192.168.0.14:8080/mfs/message/redirectpage");
 		statusCode = exchange.getStatusCode();
 		System.out.println(statusCode);
 		System.out.println(exchange.getBody());

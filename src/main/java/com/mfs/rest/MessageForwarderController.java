@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -23,14 +24,29 @@ public class MessageForwarderController {
 		modelAndView.addObject("myurl", url);
 		return modelAndView;
 	}
-	
 
 	@RequestMapping(value = "redirect", method = RequestMethod.POST)
-	public ModelAndView processFrontEndRequest(@RequestBody String redirectedMessage) {
+	public ModelAndView processFrontEndRequest(@RequestParam(value = "test") String redirectedMessage) {
 		String redirectUrl = "forward";
 		String nameValue = "test message";
-		// System.out.println(redirectedMessage);
+		 System.out.println(redirectedMessage);
+	   redirectedMessage = "dummy";
+		 System.out.println(redirectedMessage);
+		 
 		ModelAndView modelAndView = new ModelAndView("redirectpage");
+		modelAndView.addObject("redirectedMessage", redirectedMessage);
+		modelAndView.addObject("nameValue", nameValue);
+		modelAndView.addObject("redirectUrl", redirectUrl);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "redirectpage" ,headers = "content-type=application/xml", consumes = {"application/xml"}, method = RequestMethod.POST)
+	public ModelAndView processFrontEndReq(@RequestBody Customer cust) {
+		String redirectUrl = "forward";
+		String nameValue = "test message";
+		String redirectedMessage = cust.getName();
+		// System.out.println(redirectedMessage);
+		ModelAndView modelAndView = new ModelAndView("redirectrequest");
 		modelAndView.addObject("redirectedMessage", redirectedMessage);
 		modelAndView.addObject("nameValue", nameValue);
 		modelAndView.addObject("redirectUrl", redirectUrl);
