@@ -1,5 +1,5 @@
-<%@page language="java" session="true" 
-contentType="text/html;charset=ISO-8859-1" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page language="java" session="true" contentType="text/html;charset=ISO-8859-1" %> 
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 
@@ -11,9 +11,9 @@ ransitional//EN" "http://www.w3.org/
   <head>
     <meta charset="UTF-8">
     <title>Checkout form</title>  
-<link rel="stylesheet" type="text/css" href="/resources/css/style.css"/>
  
-
+ 
+<link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet"  type="text/css" />
   </head>
   <body>
     <!-- heading starts here -->
