@@ -1,0 +1,24 @@
+	<html>
+		<head>
+			<title> Payment Page Redirection</title>
+			<meta HTTP-EQUIV="Content-Type" CONTENT="application/xml;charset=ISO-8859-1"/>
+			<meta HTTP-EQUIV="Cache-Control" CONTENT="no cache"/>
+			<meta HTTP-EQUIV="Pragma" CONTENT="no cache"/>
+			<meta HTTP-EQUIV="Expires" CONTENT="0"/>
+		</head>
+		<!-- <body OnLoad="OnLoadEvent()"> -->
+		<body>
+		<form name="downloadForm" action="http://192.168.0.14:8080/mfs/message/redirect" method="POST">
+		<input type="hidden" size="1234" name="test" value='<?xml version="1.0"?><customer><age>1</age><name>Gambardella, Matthew</name><id>12</id></customer>' /> 
+	     <!-- <input type="text"  name="test" size="1234" />-->
+		 <input type="submit" value="Submit"/>
+		</form>
+		
+	<!--	 <script language="Javascript">{ 
+				fn:string("function OnLoadEvent(){ document.downloadForm.submit(); }")
+				}
+ 		</script> -->
+ 		
+ 		 
+		</body>
+	</html>

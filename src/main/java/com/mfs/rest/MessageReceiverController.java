@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "message")
-public class MessageForwarderController {
+@RequestMapping(value = "receiver")
+public class MessageReceiverController {
 	
 	@RequestMapping(value = "ping")
 	public ModelAndView ping() {
@@ -19,9 +19,9 @@ public class MessageForwarderController {
 
 	@RequestMapping(value = "checkout")
 	public ModelAndView processMerchantRequest() {
-		String url = "/mfs/receiver/redirect";
-		ModelAndView modelAndView = new ModelAndView("mypage");
-		//ModelAndView modelAndView = new ModelAndView("merchantrequest");
+		String url = "http://192.168.0.14:8080/mfs/receiver/redirect";
+		//ModelAndView modelAndView = new ModelAndView("mypage");
+		ModelAndView modelAndView = new ModelAndView("merchantrequest");
 		modelAndView.addObject("myurl", url);
 		modelAndView.addObject("flag", "true");
 		return modelAndView;
